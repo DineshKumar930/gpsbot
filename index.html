@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS-Bot AI Assistant | Govt. Polytechnic Sahjanwa</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="icon" type="image/x-icon" href="image/logo.png">
+</head>
+<body>
+    <!-- Background Particles -->
+    <div id="particles-js"></div>
+    
+    <!-- Notification Toast -->
+    <div class="notification-toast" id="notification">
+        <i class="fas fa-bell"></i>
+        <span>Welcome to GPS-Bot Assistant!</span>
+        <button class="toast-close" onclick="hideNotification()">×</button>
+    </div>
+
+    <!-- Desktop Version -->
+    <div class="desktop-container animate__animated animate__fadeIn">
+        <!-- College Info Sidebar -->
+        <div class="college-sidebar">
+            <div class="sidebar-background"></div>
+            
+            <!-- College Header -->
+            <div class="college-header">
+                <div class="college-logo">
+    <img src="image/logo.png" alt="College Logo" class="college-logo-img">
+    <div class="online-badge"></div>
+</div>
+
+                <h1 class="college-title">GPS-Bot</h1>
+                <p class="college-subtitle">Government Polytechnic Sahjanwa</p>
+                <div class="college-tagline">
+                    <span class="tagline-badge">🎓 Excellence in Technical Education</span>
+                </div>
+            </div>
+            
+            <!-- College Stats -->
+            <div class="college-stats">
+                <div class="stat-item">
+                    <div class="stat-number">120+</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Faculty</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Acres Campus</div>
+                </div>
+            </div>
+            
+            <!-- Quick Info Cards -->
+            <div class="info-cards">
+                <div class="info-card" data-action="admission">
+                    <div class="card-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>JEECUP Admission</h4>
+                        <p>2024-25 Open</p>
+                        <span class="card-badge alert">New</span>
+                    </div>
+                </div>
+                
+                <div class="info-card" data-action="courses">
+                    <div class="card-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>Diploma Programs</h4>
+                        <p>3 Engineering Branches</p>
+                        <span class="card-badge">Popular</span>
+                    </div>
+                </div>
+                
+                <div class="info-card" data-action="location">
+                    <div class="card-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>Campus Location</h4>
+                        <p>Hardi, Hasanpur, Sahjanwa, Gorakhpur</p>
+                    </div>
+                </div>
+                
+                <div class="info-card" data-action="contact">
+                    <div class="card-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>24/7 Support</h4>
+                        <p>Get Help Anytime</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Status -->
+            <div class="ai-status">
+                <div class="ai-pulse"></div>
+                <span>AI Assistant Active</span>
+                <div class="ai-accuracy">98% Accuracy</div>
+            </div>
+        </div>
+        
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="chat-header-info">
+                        <h3>GPS AI Assistant</h3>
+                        <p class="typing-status" id="desktopTypingStatus">Online • Ready to help</p>
+                        <div class="chat-tags">
+                            <span class="chat-tag">🤖 AI-Powered</span>
+                            <span class="chat-tag">⚡ Instant Replies</span>
+                            <span class="chat-tag">📚 Education Expert</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-header-right">
+                    <div class="header-actions">
+                        <button class="header-btn" title="Clear Chat" id="clearDesktopChat">
+                            <i class="fas fa-broom"></i>
+                        </button>
+                        <button class="header-btn" title="Share Chat" id="shareDesktopChat">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                        <button class="header-btn" title="Settings" id="openDesktopSettings">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Body -->
+            <div class="chat-body" id="desktopChatBody">
+                <!-- Messages will be loaded here -->
+            </div>
+            
+            <!-- Chat Suggestions -->
+            <div class="chat-suggestions" id="desktopSuggestions">
+                <p>Try asking:</p>
+                <div class="suggestion-chips">
+                    <button class="suggestion-chip" data-action="admission">
+                        <i class="fas fa-sign-in-alt"></i> Admission Process
+                    </button>
+                    <button class="suggestion-chip" data-action="courses">
+                        <i class="fas fa-book"></i> Courses Details
+                    </button>
+                    <button class="suggestion-chip" data-action="fees">
+                        <i class="fas fa-rupee-sign"></i> Fee Structure
+                    </button>
+                    <button class="suggestion-chip" data-action="hostel">
+                        <i class="fas fa-bed"></i> Hostel Facilities
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Chat Footer -->
+            <!-- Desktop Chat Footer -->
+<div class="chat-footer">
+    <div class="input-container">
+        <div class="input-icons-left">
+            <button class="input-icon-btn" title="Voice Input" id="desktopVoiceBtn">
+                <i class="fas fa-microphone" id="desktopMicIcon"></i>
+            </button>
+            <button class="input-icon-btn" title="Attach File" id="desktopAttachBtn" onclick="attachFile()">
+                <i class="fas fa-paperclip"></i>
+            </button>
+        </div>
+
+        <input type="text" 
+               id="desktopInput" 
+               placeholder="Ask about admissions, courses, fees, campus life..." 
+               autocomplete="off"
+               onfocus="hideSuggestions('desktop')"
+               onblur="showSuggestions('desktop')">
+
+        <div class="input-icons-right">
+            <button class="input-icon-btn" title="Emoji" id="desktopEmojiBtn" onclick="showEmojiPicker('desktop')">
+                <i class="far fa-smile"></i>
+            </button>
+            <button class="input-icon-btn" title="AI Help" id="desktopHelpBtn" onclick="openAIHelp('desktop')">
+                <i class="fas fa-magic"></i>
+            </button>
+        </div>
+    </div>
+
+    <button class="send-btn" id="desktopSendBtn">
+        <i class="fas fa-paper-plane"></i>
+        <div class="send-pulse"></div>
+    </button>
+</div>
+
+            
+            <!-- Voice Input Indicator -->
+            <div class="voice-input-indicator" id="desktopVoiceIndicator">
+                <div class="voice-animation">
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                </div>
+                <p>Listening... Speak now</p>
+                <button class="voice-stop" id="desktopVoiceStop">Stop</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Version -->
+    <div class="mobile-container">
+        <!-- Mobile Header -->
+        <div class="mobile-header">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="mobile-college-info">
+               <div class="mobile-logo">
+    <img src="image/logo.png" alt="College Logo" class="mobile-logo-img">
+</div>
+
+
+                <div class="mobile-college-details">
+                    <h3>GPS AI Assistant</h3>
+                    <p class="mobile-status" id="mobileTypingStatus">Online</p>
+                </div>
+            </div>
+            
+            <button class="mobile-action-btn" id="mobileClearBtn">
+                <i class="fas fa-eraser"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Chat Body -->
+        <div class="mobile-chat-body" id="mobileChatBody">
+            <!-- Messages will be loaded here -->
+        </div>
+        
+        <!-- Mobile Suggestions -->
+        <div class="mobile-suggestions" id="mobileSuggestions">
+            <div class="suggestion-chips">
+                <button class="suggestion-chip" data-action="admission">
+                    <i class="fas fa-sign-in-alt"></i> Admission
+                </button>
+                <button class="suggestion-chip" data-action="courses">
+                    <i class="fas fa-book"></i> Courses
+                </button>
+                <button class="suggestion-chip" data-action="fees">
+                    <i class="fas fa-rupee-sign"></i> Fees
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Chat Footer -->
+       <!-- Mobile Chat Footer -->
+<div class="mobile-chat-footer">
+    <div class="input-container">
+        <button class="mobile-input-icon" id="mobileVoiceBtn">
+            <i class="fas fa-microphone" id="mobileMicIcon"></i>
+        </button>
+
+        <input type="text" 
+               id="mobileInput" 
+               placeholder="Type your question..."
+               autocomplete="off"
+               onfocus="hideSuggestions('mobile')"
+               onblur="showSuggestions('mobile')">
+
+        <button class="mobile-input-icon" id="mobileAttachBtn" onclick="attachFile()">
+            <i class="fas fa-paperclip"></i>
+        </button>
+        
+    </div>
+
+    <button class="mobile-send-btn" id="mobileSendBtn">
+        <i class="fas fa-paper-plane"></i>
+    </button>
+</div>
+
+        <!-- Mobile Voice Indicator -->
+        <div class="mobile-voice-indicator" id="mobileVoiceIndicator">
+            <div class="voice-animation">
+                <div class="voice-bar"></div>
+                <div class="voice-bar"></div>
+                <div class="voice-bar"></div>
+            </div>
+            <p>Listening...</p>
+            <button class="voice-stop" id="mobileVoiceStop">Stop</button>
+        </div>
+        
+        <!-- Mobile Side Menu -->
+        <div class="mobile-side-menu" id="mobileMenu">
+            <div class="menu-header">
+                <h3>GPS-Bot Menu</h3>
+                <button class="menu-close" id="mobileMenuClose">×</button>
+            </div>
+            <div class="menu-items">
+                <a class="menu-item" data-action="admission">
+                    <i class="fas fa-sign-in-alt"></i> Admission
+                </a>
+                <a class="menu-item" data-action="courses">
+                    <i class="fas fa-book"></i> Courses
+                </a>
+                <a class="menu-item" data-action="fees">
+                    <i class="fas fa-rupee-sign"></i> Fees
+                </a>
+                <a class="menu-item" data-action="location">
+                    <i class="fas fa-map-marker-alt"></i> Location
+                </a>
+                <a class="menu-item" data-action="contact">
+                    <i class="fas fa-phone"></i> Contact
+                </a>
+                <a class="menu-item" id="mobileMenuClear">
+                    <i class="fas fa-broom"></i> Clear Chat
+                </a>
+                <a class="menu-item" id="mobileMenuSettings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>AI Assistant Settings</h3>
+                <button class="modal-close" id="closeSettings">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="typingIndicator" checked>
+                        Show typing indicator
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="soundEffects" checked>
+                        Sound effects
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="autoScroll" checked>
+                        Auto-scroll to new messages
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="suggestions" checked>
+                        Show suggestions
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="quickActions" checked>
+                        Show quick action buttons
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelSettings">Cancel</button>
+                <button class="btn btn-primary" id="saveSettings">Save Settings</button>
+            </div>
+        </div>
+    </div>
+<!-- Updated Script Loading -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="botKnowledge.js"></script>
+<script src="timeTable.js"></script>
+<script src="facultyInfo.js"></script>
+<script src="eventInfo.js"></script>
+<script src="eventResponse.js"></script>
+<script src="getBotResponse.js"></script>
+<script src="script.js"></script>
+    <!-- Fallback for missing scripts -->
+    <script>
+        // Check if required scripts are loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (typeof botKnowledge === 'undefined') {
+                    console.error('botKnowledge.js not loaded!');
+                    showNotification('Error: Bot knowledge data not loaded. Please refresh.');
+                }
+                if (typeof getBotResponse === 'undefined') {
+                    console.error('getBotResponse.js not loaded!');
+                    showNotification('Error: Bot response system not loaded. Please refresh.');
+                }
+                if (typeof getEventResponse === 'undefined') {
+                    console.error('eventResponse.js not loaded!');
+                    showNotification('Error: Event system not loaded. Please refresh.');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
