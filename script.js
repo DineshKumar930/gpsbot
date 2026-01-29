@@ -420,26 +420,25 @@ function addUserMessage(text, version) {
 
 function addBotMessage(response, version) {
     const chatBody = elements[version].chatBody;
+
     const lastBotMessage = chatBody.querySelector('.bot-message:last-child');
-    
     if (lastBotMessage) {
         const lastContent = lastBotMessage.textContent;
         const currentContent = response.message || '';
-        
+
         if (lastContent.includes(currentContent.substring(0, 100))) {
             console.log("Duplicate response detected, skipping...");
             isProcessing = false;
             return;
         }
     }
-    
-    const time = getCurrentTime();
 
+    const time = getCurrentTime();
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message bot-message animate__animated animate__fadeInUp';
 
     const safeTitle = escapeHtml(response.title || 'GPS Assistant');
-    
+
     messageDiv.innerHTML = `
         <strong>${safeTitle}</strong><br><br>
         <span class="typing-text"></span>
@@ -447,31 +446,50 @@ function addBotMessage(response, version) {
     `;
 
     chatBody.appendChild(messageDiv);
-    
-    if (currentSettings.autoScroll) {
-        scrollToBottom(version);
-    }
-    
-    if (currentSettings.soundEffects) {
-        playSound('receive');
-    }
+
+    if (currentSettings.autoScroll) scrollToBottom(version);
+    if (currentSettings.soundEffects) playSound('receive');
 
     const typingSpan = messageDiv.querySelector('.typing-text');
 
-    typeTextWithHTML(typingSpan, response.message || 'No response available.', () => {
-        // Add quick actions after typing completes
-        if (currentSettings.quickActions && response.quickActions && response.quickActions.length > 0) {
-            addQuickActions(response.quickActions, version, messageDiv);
-        }
-        
-        // Setup listeners for the new quick actions
-        setTimeout(() => {
-            setupQuickActionListeners(version);
-        }, 100);
-        
-        isProcessing = false;
-    }, version);
+    typeTextWithHTML(
+        typingSpan,
+        response.message || 'No response available.',
+        () => {
+            // ✅ ADD COPY BUTTON AFTER TYPING COMPLETES
+            const copyBtn = document.createElement('span');
+            copyBtn.className = 'copy-btn';
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+
+            copyBtn.onclick = () => {
+                const text = typingSpan.innerText.trim();
+
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                    }, 1200);
+                });
+            };
+
+            messageDiv.appendChild(copyBtn);
+
+            // quick actions
+            if (
+                currentSettings.quickActions &&
+                response.quickActions &&
+                response.quickActions.length > 0
+            ) {
+                addQuickActions(response.quickActions, version, messageDiv);
+            }
+
+            setTimeout(() => setupQuickActionListeners(version), 100);
+            isProcessing = false;
+        },
+        version
+    );
 }
+
 
 function addQuickActions(actions, version, messageDiv) {
     const actionsDiv = document.createElement('div');
