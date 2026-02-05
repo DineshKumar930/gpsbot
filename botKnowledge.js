@@ -299,7 +299,7 @@ Students and visitors are encouraged to follow the college timings and guideline
     
     pradumn: {
             title: "👨‍🏫 Mr. Pradumn Kumar Pandey",
-            message: "• Department: Library & Information Science<br>• Position: Librarian <br>• Subjects: Library Management, Information Retrieval<br>• Qualification: M.L.I.S,B.L.I.S (Library Science)<br>• Experience: 8+ Years<br>• Email: pradumn.library@gpsahajnwa.ac.in",
+            message: "• Department: Library & Information Science & Digital Account Creater<br>• Contact: How to create account <br>•• Position: Librarian <br>• Subjects: Library Management, Information Retrieval<br>• Qualification: M.L.I.S,B.L.I.S (Library Science)<br>• Experience: 8+ Years<br>• Email: pradumn.library@gpsahajnwa.ac.in",
             quickActions: ['library', 'faculty codes', 'library timetable']
         },
 
